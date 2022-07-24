@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('puertos', function (Blueprint $table) {
+        Schema::create('embarcacionxpuerto', function (Blueprint $table) {
             $table->id();
-            $table->string('ciudad');
-            $table->string('provincia');
-            $table->string('pais');
-            $table->string('ubicacion');
+            $table->integer('embarcacion');
+            $table->integer('puerto');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('puertos');
+        Schema::dropIfExists('embarcacionxpuerto');
     }
 };

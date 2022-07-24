@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Puerto extends Model
+class TipoEmbarcacion extends Model
 {
     use HasFactory;
-    protected $fillable = ['ciudad','provincia','pais','ubicacion'];
+    protected $fillable = ['nombre'];
 }
