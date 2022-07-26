@@ -22,6 +22,7 @@ return new class extends Migration
             $table->float('ancho')->nullable();
             $table->integer('carga_max')->nullable();
             //$table->foreign('tipo_embarcacion')->references('id')->on('tipo_embarcacions')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('tipo_embarcacion'); //falsa foreign
             $table->timestamps();
         });
     }

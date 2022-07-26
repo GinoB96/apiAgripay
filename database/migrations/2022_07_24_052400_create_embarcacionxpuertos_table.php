@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             //$table->foreign('embarcacion')->references('id')->on('embarcacions')->onDelete('cascade')->onUpdate('cascade');
             //$table->foreign('puerto')->references('id')->on('puertos')->onDelete('cascade')->onUpdate('cascade');
+            $table->bigInteger('embarcacion'); //falsa foreign
+            $table->bigInteger('puerto'); //falsa foreign
             $table->date('fecha');
             $table->timestamps();
         });
