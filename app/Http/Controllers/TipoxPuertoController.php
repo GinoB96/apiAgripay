@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\tipoxpuerto;
+use App\Models\tipoxpuerto;
 
 class TipoxPuertoController extends Controller
 {

@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('puerto', function (Blueprint $table) {
+        Schema::create('embarcacionxpuertos', function (Blueprint $table) {
             $table->id();
-            $table->string('ciudad');
-            $table->string('provincia');
-            $table->string('pais');
-            $table->string('ubicacion');
+            //$table->foreign('embarcacion')->references('id')->on('embarcacions')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('puerto')->references('id')->on('puertos')->onDelete('cascade')->onUpdate('cascade');
+            $table->date('fecha');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('puerto');
+        Schema::dropIfExists('embarcacionxpuertos');
     }
 };

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\embarcacionxpropietario;
+use App\Models\embarcacionxpropietario;
 
 class EmbxProController extends Controller
 {

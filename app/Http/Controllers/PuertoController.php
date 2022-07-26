@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Puerto;
+use App\Models\Puerto;
+use App\Models\servicioxpuerto;
 
 class PuertoController extends Controller
 {
@@ -18,17 +19,7 @@ class PuertoController extends Controller
 
         $data = ['puertos'=>$puertos];
 
-        return response()->json($data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return response()->json($data, 200);
     }
 
     /**
@@ -39,13 +30,8 @@ class PuertoController extends Controller
      */
     public function store(Request $request)
     {
-        $puerto = new Puerto();
-        $puerto->ciudad = $request->ciudad;
-        $puerto->provincia = $request->provincia;
-        $puerto->pais = $request->pais;
-        $puerto->ubicacion = $request->ubicacion;
-
-        $puerto->save();
+        $puerto = Puerto::create($request->all());
+        return response($puerto, 201);
     }
 
     /**
@@ -54,22 +40,14 @@ class PuertoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $puerto = Puerto::find($request->id);
-
-        return response()->json($puerto);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
-        //
+        $puerto = Puerto::find($id);
+        if(is_null($puerto)){
+            return response()->json(['mensaje' => 'No se encontro el puerto'], 404);
+        }else{
+            return response()->json($puerto);
+        }
     }
 
     /**
@@ -79,16 +57,13 @@ class PuertoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        $puerto = Puerto::findOrFail($request->id);
+        $puerto = Puerto::find($id);
 
-        $puerto->ciudad = $request->ciudad;
-        $puerto->provincia = $request->provincia;
-        $puerto->pais = $request->pais;
-        $puerto->ubicacion = $request->ubicacion;
+        $puerto->update($request->all());
 
-        $puerto->save();
+        return response($puerto, 200);
     }
 
     /**
@@ -97,9 +72,14 @@ class PuertoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request,$id)
     {
-        $puerto = Puerto::find($request->id);
-        $puerto->delete();
+        $puerto = Puerto::find($id);
+        if(is_null($puerto)){
+            return response()->json(['mensaje' => 'No se encontro el puerto'], 404);
+        }else{
+            $puerto->delete();
+            return response()->json(['mensaje' => 'Puerto eliminado'], 204);
+        }
     }
 }

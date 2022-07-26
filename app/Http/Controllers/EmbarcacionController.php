@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Embarcacion;
+use App\Models\Embarcacion;
+use App\Models\Tipo_embarcacion;
 
 class EmbarcacionController extends Controller
 {
@@ -14,17 +15,11 @@ class EmbarcacionController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $embarcacion = Embarcacion::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $data = ['embarcaciones'=>$embarcacion];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -35,7 +30,14 @@ class EmbarcacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $id = $request->tipo_embarcacion;
+        $tipoEmbarcacion = Tipo_embarcacion::find($id);
+        if(is_null($tipoEmbarcacion)){
+            return response()->json(['mensaje' => 'No se encontro el tipo de embarcacion'], 404);
+        }else{
+            $embarcacion = Embarcacion::create($request->all());
+            return response($embarcacion, 201);
+        }
     }
 
     /**
@@ -46,19 +48,15 @@ class EmbarcacionController extends Controller
      */
     public function show($id)
     {
-        //
+        $embarcacion = Embarcacion::find($id);
+
+        if(is_null($embarcacion)){
+            return response()->json(['mensaje' => 'No se encontro la embarcacion'], 404);
+        }else{
+            return response()->json($embarcacion);
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -67,9 +65,13 @@ class EmbarcacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $embarcacion = Embarcacion::findOrFail($id);
+
+        $embarcacion->update($request->all());
+
+        return response($embarcacion, 200);
     }
 
     /**
@@ -80,6 +82,12 @@ class EmbarcacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $embarcacion = Embarcacion::find($id);
+        if(is_null($embarcacion)){
+            return response()->json(['mensaje' => 'No se encontro la embarcacion'], 404);
+        }else{
+            $embarcacion->delete();
+            return response()->json(['mensaje' => 'Embarcacion eliminada'], 204);
+        }
     }
 }

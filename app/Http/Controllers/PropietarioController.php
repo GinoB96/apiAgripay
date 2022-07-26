@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\Propietario;
+use App\Models\Propietario;
 
 class PropietarioController extends Controller
 {
@@ -14,17 +14,11 @@ class PropietarioController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $propietario = Propietario::all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $data = ['propietarios'=>$propietario];
+
+        return response()->json($data, 200);
     }
 
     /**
@@ -35,7 +29,8 @@ class PropietarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $propietario = Propietario::create($request->all());
+        return response($propietario, 201);
     }
 
     /**
@@ -46,18 +41,13 @@ class PropietarioController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+        $propietario = Propietario::find($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        if(is_null($propietario)){
+            return response()->json(['mensaje' => 'No se encontro el propietario'], 404);
+        }else{
+            return response()->json($propietario);
+        }
     }
 
     /**
@@ -69,7 +59,11 @@ class PropietarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $propietario = Propietario::findOrFail($id);
+
+        $propietario->update($request->all());
+
+        return response($propietario, 200);
     }
 
     /**
@@ -80,6 +74,12 @@ class PropietarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $propietario = Propietario::find($id);
+        if(is_null($propietario)){
+            return response()->json(['mensaje' => 'No se encontro el propietario'], 404);
+        }else{
+            $propietario->delete();
+            return response()->json(['mensaje' => 'Propietario eliminado'], 204);
+        }
     }
 }

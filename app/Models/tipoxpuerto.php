@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class tipoxpuerto extends Model
 {
     use HasFactory;
-    protected $fillable = ['puerto','tipoEmbarcacion'];
+    public $timestamps = false;
+    protected $fillable = ['puerto','tipo_embarcacion'];
 }

@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class embarcacionxpropietario extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = ['propietario','embarcacion'];
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Model\servicioxpuerto;
+use App\Models\servicioxpuerto;
 
 class SerxPuertoController extends Controller
 {
@@ -35,7 +35,8 @@ class SerxPuertoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $sxp = servicioxpuerto::create($request->all());
+        return response($sxp, 201);
     }
 
     /**

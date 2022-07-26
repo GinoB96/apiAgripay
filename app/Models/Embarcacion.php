@@ -8,5 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Embarcacion extends Model
 {
     use HasFactory;
-    protected $fillable = ['matricula','nombre','color','largo','ancho','carga_max','tipoEmbarcacion'];
+    public $timestamps = false;
+    protected $fillable = ['matricula','nombre','color','largo','ancho','carga_max','tipo_embarcacion'];
 }

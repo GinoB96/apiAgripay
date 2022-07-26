@@ -13,15 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('embarcacion', function (Blueprint $table) {
+        Schema::create('embarcacionxpropietarios', function (Blueprint $table) {
             $table->id();
-            $table->string('matricula');
-            $table->string('nombre');
-            $table->string('color');
-            $table->float('largo');
-            $table->float('ancho');
-            $table->integer('carga_max');
-            $table->integer('tipo_embarcacion');
+            //$table->foreign('propietario')->references('id')->on('propietarios')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('embarcacion')->references('id')->on('embarcacions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('embarcacion');
+        Schema::dropIfExists('embarcacionxpropietarios');
     }
 };

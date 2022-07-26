@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_embarcacion', function (Blueprint $table) {
+        Schema::create('servicioxpuertos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            //$table->foreign('puerto')->references('id')->on('puertos')->onDelete('cascade')->onUpdate('cascade');
+            //$table->foreign('servicio')->references('id')->on('servicios')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipo_embarcacion');
+        Schema::dropIfExists('servicioxpuertos');
     }
 };

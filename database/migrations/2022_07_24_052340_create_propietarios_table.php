@@ -13,10 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tipoxpuerto', function (Blueprint $table) {
+        Schema::create('propietarios', function (Blueprint $table) {
             $table->id();
-            $table->integer('puerto');
-            $table->integer('tipo_embarcacion');
+            $table->string('dni');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->date('nacimiento');
+            $table->string('mail');
+            $table->string('telefono');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tipoxpuerto');
+        Schema::dropIfExists('propietarios');
     }
 };

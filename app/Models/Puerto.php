@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class embarcacionxpuerto extends Model
+class Puerto extends Model
 {
     use HasFactory;
     public $timestamps = false;
-    protected $fillable = ['embarcacion','puerto','fecha'];
+    protected $fillable = ['ciudad','provincia','pais','ubicacion'];
 }
